@@ -39,7 +39,6 @@ final class UserCreator
         if (empty($user->username)) {
             throw new UnexpectedValueException('Username required');
         }
-
         // Insert user
         $userId = $this->repository->insertUser($user);
 
