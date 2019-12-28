@@ -47,9 +47,9 @@ class UserCreatorRepository
         return $newId;
     }
 
-    public function getEmail($email)
+    public function checkEmptyEmail($email)
     {
-        $rows = $this->connection->table('users')->where('email', $email)->get();
+        $rows = $this->connection->table('users')->where('email', $email)->get()->isEmpty();
         return $rows;
     }
 }

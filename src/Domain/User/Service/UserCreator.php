@@ -40,8 +40,8 @@ final class UserCreator
             throw new UnexpectedValueException('Email required', 400);
         }
 
-        $repeated_email = $this->repository->getEmail($user->email);
-        if (empty($repeated_email)===false){
+        $repeated_email = $this->repository->checkEmptyEmail($user->email);
+        if (!$repeated_email){
             throw new UnexpectedValueException('Repeated Email', 400);
         }
 
