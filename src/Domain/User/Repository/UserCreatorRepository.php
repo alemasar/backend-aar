@@ -35,14 +35,21 @@ class UserCreatorRepository
     public function insertUser(UserCreateData $user): int
     {
         $row = [
-            'username' => $user->username,
-            'first_name' => $user->firstName,
-            'last_name' => $user->lastName,
+            'name' => $user->name,
             'email' => $user->email,
+            'password' => $user->password,
+            'created_at' => $user->created_at,
+            'updated_at' => $user->updated_at
         ];
 
         $newId = $this->connection->table('users')->insertGetId($row);
 
         return $newId;
+    }
+
+    public function getEmail($email)
+    {
+        $rows = $this->connection->table('users')->where('email', $email)->get();
+        return $rows;
     }
 }

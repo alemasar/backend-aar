@@ -36,9 +36,15 @@ final class UserCreator
     public function createUser(UserCreateData $user): int
     {
         // Validation
-        if (empty($user->username)) {
-            throw new UnexpectedValueException('Username required');
+        if (empty($user->email)) {
+            throw new UnexpectedValueException('Email required', 400);
         }
+
+        $repeated_email = $this->repository->getEmail($user->email);
+        if (empty($repeated_email)===false){
+            throw new UnexpectedValueException('Repeated Email', 400);
+        }
+
         // Insert user
         $userId = $this->repository->insertUser($user);
 
