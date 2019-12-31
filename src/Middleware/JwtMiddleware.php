@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
+use UnexpectedValueException;
 /**
  * JWT middleware.
  */
@@ -44,9 +44,7 @@ final class JwtMiddleware implements MiddlewareInterface
         $token = $authorization[1] ?? '';
 
         if (!$token || !$this->jwtAuth->validateToken($token)) {
-            return $this->responseFactory->createResponse()
-                ->withHeader('Content-Type', 'application/json')
-                ->withStatus(401, 'Unauthorized');
+            throw new UnexpectedValueException('Not authorized', 401);
         }
 
         // Append valid token
