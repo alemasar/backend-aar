@@ -1,8 +1,9 @@
 <?php
 
 use Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-class CreateUsersTable extends Migration
+class CreateUsersRolesTable extends Migration
 {
     /**
      * Change Method.
@@ -31,18 +32,19 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('users', function (Illuminate\Database\Schema\Blueprint $table) {
+        $this->schema->create('roles', function (Illuminate\Database\Schema\Blueprint $table) {
             // Auto-increment id
             $table->increments('id');
-            $table->string('name',50);
-            $table->string('email',50)->unique();
-            $table->string('password');
-            // Required for Eloquent's created_at and updated_at columns
-            $table->timestamps();
+            $table->string('role',50);
+        });
+
+        $this->schema->table('users', function (Illuminate\Database\Schema\Blueprint $table) {
+            // Auto-increment id
+            $table->unsignedInteger('role_id');
         });
     }
     public function down()
     {
-        $this->schema->drop('users');
+       $this->schema->drop('roles');
     }
 }

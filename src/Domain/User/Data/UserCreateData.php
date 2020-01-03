@@ -18,4 +18,7 @@ final class UserCreateData
 
     /** @var string */
     public $updated_at;
+
+    /** @var int */
+    public $role;
 }

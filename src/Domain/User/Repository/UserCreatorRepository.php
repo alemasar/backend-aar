@@ -39,9 +39,9 @@ class UserCreatorRepository
             'email' => $user->email,
             'password' => $user->password,
             'created_at' => $user->created_at,
-            'updated_at' => $user->updated_at
+            'updated_at' => $user->updated_at,
+            'role_id' => $user->role
         ];
-
         $newId = $this->connection->table('users')->insertGetId($row);
 
         return $newId;

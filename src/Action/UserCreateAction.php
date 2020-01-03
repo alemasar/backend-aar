@@ -28,6 +28,8 @@ final class UserCreateAction
         $user->created_at = $now;
         $user->updated_at = $now;
         $user->password = hash('gost', $data['password'].$user->name.$user->created_at);
+        $user->role = $data['role'];
+        
         // Invoke the Domain with inputs and retain the result
         $userId = $this->userCreator->createUser($user);
         // Transform the result into the JSON representation

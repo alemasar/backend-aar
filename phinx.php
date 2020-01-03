@@ -5,7 +5,8 @@ use Selective\Config\Configuration;
 $settings = new Configuration(require __DIR__ . '/config/settings.php');
 return [
     'paths' => [
-      'migrations' => 'database/migrations'
+      'migrations' => 'database/migrations',
+      'seeds' => 'database/seeds'
     ],
     'migration_base_class' => 'Migrations\Migration',
     'environments' => [

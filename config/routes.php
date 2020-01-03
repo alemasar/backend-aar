@@ -40,5 +40,6 @@ return function (App $app) {
     ]));
     $app->get('/', \App\Action\HomeAction::class);
     $app->map(["OPTIONS", "POST"],'/users', \App\Action\UserCreateAction::class)->add(\App\Middleware\JwtMiddleware::class);
+    $app->map(["OPTIONS", "POST"],'/roles', \App\Action\ListUserRolesAction::class)->add(\App\Middleware\JwtMiddleware::class);
     $app->map(["OPTIONS", "POST"], '/api/tokens', \App\Action\TokenCreateAction::class);
 };
